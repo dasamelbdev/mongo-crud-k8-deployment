@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: mongo-crud
+  data: 
+    mongodb:
+      database: todo-db
+      port: 27017
