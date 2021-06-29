@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+  greeting:
+    image: dasun1986/mongo-crud:1.1.0
+    ports:
+    - 8089:8084
+    restart: always
+    depends_on:
+    - mongo_db
+  mongo_db:
+    image: mongo:latest
+    restart: always
+    ports:
+    - 27017:27017

@@ -3,5 +3,6 @@ spring:
     name: mongo-crud
   data: 
     mongodb:
+      host: mongo_db
       database: todo-db
       port: 27017
