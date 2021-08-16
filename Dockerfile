@@ -1,3 +1,3 @@
 FROM openjdk:8-jdk-alpine
 ADD target/mongo-crud-0.0.1-SNAPSHOT.jar /mongo-crud-0.0.1-SNAPSHOT.jar
-ENTRYPOINT ["java", "-jar", "mongo-crud-0.0.1-SNAPSHOT.jar","--server.port=8084","--spring.profiles.active=dev"]
+ENTRYPOINT ["java", "-jar", "mongo-crud-0.0.1-SNAPSHOT.jar"]
