@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-backend-deployment
+  namespace: todoapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-backend-pod
+  template:
+    metadata:
+      labels:
+        app: todo-backend-pod
+    spec:
+      containers:
+      - name: todo-backend
+        image: dasun1986/mongo-crud:1.1.0
+        ports:
+        - containerPort: 8084
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: dev
+        - name: SERVER_PORT
+          valueFrom:
+             configMapKeyRef:
+                name: todo-dev-configmap
+                key: server.port
+        - name: SPRING_DATA_MONGODB_HOST
+          valueFrom:
+             configMapKeyRef:
+                name: todo-dev-configmap
+                key: mongodb.host
+        - name: SPRING_DATA_MONGODB_DATABASE
+          valueFrom:
+             configMapKeyRef:
+                 name: todo-dev-configmap
+                 key: mongodb.database
+        - name: SPRING_DATA_MONGODB_PORT
+          valueFrom:
+             configMapKeyRef:
+                 name: todo-dev-configmap
+                 key: mongodb.port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-express-service
+  namespace: todoapp
+spec:
+  selector:
+    app: todo-backend-pod
+  type: LoadBalancer
+  ports:
+    - port: 8082
+      targetPort: 8084
+      nodePort: 30112

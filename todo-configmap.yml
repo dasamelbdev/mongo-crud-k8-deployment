@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todo-dev-configmap
+  namespace: todoapp
+data:
+  mongodb.host: "mongodb-service"
+  mongodb.database: "todo-db"
+  mongodb.port: "27017"
+  server.port: "8082"
